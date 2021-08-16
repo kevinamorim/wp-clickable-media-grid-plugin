@@ -3,18 +3,18 @@
     max-width: 100% !important;
     height: 100%;
     flex-wrap: wrap;
+    padding: 0 5px 0 5px;
 }
 
 @media only screen and (min-width: 1024px) {
     .cmg-templ-1-container {
         max-width: 80% !important;
     }
-     
 }
 
 /* Give padding to all images. */
 .cmg-img-container {
-    padding: 5px 5px 0 5px;
+    padding: 2.5px;
 }
 
 .cmg-img-container img {
@@ -24,4 +24,36 @@
 .cmg-container--columns {
     display: flex;
     width: 100%;
+}
+
+.cmg-img-container {
+    position: relative;
+    text-align: center;
+}
+
+.cmg-img-hover-zoom:hover {
+    transform: scale(1.02);
+}
+
+.cmg-category-link {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    color: black;
+    background-color: white;
+}
+@media only screen and (min-width: 1024px) {
+    .cmg-category-link {
+        bottom: 10px;
+        width: 150px;
+        height: 37.5px;
+        font-size: 14px;
+    }
 }

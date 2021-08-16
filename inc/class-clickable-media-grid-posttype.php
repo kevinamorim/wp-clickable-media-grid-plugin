@@ -25,7 +25,11 @@ class CMG_Media_Grid_Type {
 
         $options = get_option( self::GRIDS_OPTION_NAME );
 
-        $images_ids = explode( ',', $options[ $grid_id ]['images'] );
+        $images_desktop_ids = explode( ',', $options[ $grid_id ]['images_desktop'] );
+        $images_mobile_ids = explode( ',', $options[ $grid_id ]['images_mobile'] );
+        $buttons_mobile = explode( ',', $options[ $grid_id ]['buttons_mobile'] );
+        $buttons_desktop = explode( ',', $options[ $grid_id ]['buttons_desktop'] );
+
 
         $template_file = 'frontend-template-1.php';
 
