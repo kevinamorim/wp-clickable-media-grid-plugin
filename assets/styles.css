@@ -1,0 +1,27 @@
+.cmg-templ-1-container {
+    display: flex;
+    max-width: 100% !important;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+@media only screen and (min-width: 1024px) {
+    .cmg-templ-1-container {
+        max-width: 80% !important;
+    }
+     
+}
+
+/* Give padding to all images. */
+.cmg-img-container {
+    padding: 5px 5px 0 5px;
+}
+
+.cmg-img-container img {
+    height: auto !important;
+}
+
+.cmg-container--columns {
+    display: flex;
+    width: 100%;
+}
