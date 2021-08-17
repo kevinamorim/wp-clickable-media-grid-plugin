@@ -3,7 +3,7 @@
   Plugin Name: Clickable Media Grid
   Plugin URI: https://pocaconsulting.pt
   Description: Make clickable media grids.
-  Version: 1.0.0
+  Version: 0.1.0
   Author: Poça Consulting
   Author URI: https://pocaconsulting.pt
   Text Domain: clickable-media-grid
