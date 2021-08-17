@@ -92,7 +92,6 @@ class CMG_Clickable_Media_Grid_Admin {
 
         <?php $clickable_media_grids = get_option( self::GRIDS_OPTION_NAME ); ?>
 
-        
         <div class="row">
             <div class="col-12">
                 <table class="table" style="width: 100%; text-align:center;">
@@ -105,14 +104,18 @@ class CMG_Clickable_Media_Grid_Admin {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach( $clickable_media_grids as $cmg_id => $clickable_media_grid ): ?>
-                            <tr>
-                                <td><?php echo $cmg_id ?></td>
-                                <td><?php echo ( isset( $clickable_media_grid['layout'] ) ) ? $clickable_media_grid['layout'] : '-'; ?></td>
-                                <td><?php echo $clickable_media_grid['images_desktop'] ?></td>
-                                <td><?php echo $clickable_media_grid['images_mobile'] ?></td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <?php if ( isset( $clickable_media_grids ) && 
+                            is_array( $clickable_media_grids ) && 
+                            count( $clickable_media_grids ) > 0 ): ?>
+                            <?php foreach( $clickable_media_grids as $cmg_id => $clickable_media_grid ): ?>
+                                <tr>
+                                    <td><?php echo $cmg_id ?></td>
+                                    <td><?php echo ( isset( $clickable_media_grid['layout'] ) ) ? $clickable_media_grid['layout'] : '-'; ?></td>
+                                    <td><?php echo $clickable_media_grid['images_desktop'] ?></td>
+                                    <td><?php echo $clickable_media_grid['images_mobile'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
