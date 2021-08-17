@@ -15,6 +15,11 @@ class CMG_Clickable_Media_Grid_Admin {
 
         add_action( 'admin_menu', array( $this, 'create_menu_page' ) );
         add_action( 'admin_init', array( $this, 'render_fields' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+    }
+
+    public function enqueue_scripts() {
+        wp_enqueue_script( 'cmg-admin-scripts', plugin_dir_url( __FILE__ ) . '../assets/scripts.admin.js', array( 'jquery' ), false, true );
     }
 
     public function create_menu_page() {
@@ -125,6 +130,9 @@ class CMG_Clickable_Media_Grid_Admin {
     }
 
     public function grids_section() {
+
+        wp_enqueue_media();
+
         ?>
 
         <label class="cmg-settings-label" for="cmg_grid_layout"><?php _e( 'Layout:', 'clickable-media-grid' ) ?></label>
@@ -136,10 +144,12 @@ class CMG_Clickable_Media_Grid_Admin {
         <input type="text" name="cmg_grid_id" required/>
 
         <label class="cmg-settings-label" for="cmg_images_list_desktop"><?php _e( 'Images List (Desktop):', 'clickable-media-grid' ) ?></label>
-        <input type="text" name="cmg_images_list_desktop" required/>
+        <input type="text" name="cmg_images_list_desktop" id="cmg_images_list_desktop" required/>
+        <input type="button" class="button upload_image_button" data-target="cmg_images_list_desktop" value="<?php _e( 'Select images', 'clickable-media-grid' ); ?>" />
 
         <label class="cmg-settings-label" for="cmg_images_list_mobile"><?php _e( 'Images List (Mobile):', 'clickable-media-grid' ) ?></label>
-        <input type="text" name="cmg_images_list_mobile" required/>
+        <input type="text" name="cmg_images_list_mobile" id="cmg_images_list_mobile" required/>
+        <input type="button" class="button upload_image_button" data-target="cmg_images_list_mobile" value="<?php _e( 'Select images', 'clickable-media-grid' ); ?>" />
 
         <label class="cmg-settings-label" for="cmg_buttons_list_desktop"><?php _e( 'Buttons List (Desktop):', 'clickable-media-grid' ) ?></label>
         <input type="text" name="cmg_buttons_list_desktop" required/>
