@@ -38,7 +38,8 @@ class CMG_Clickable_Media_Grid_Admin {
 
     public function cmg_settings_page() {
 
-        if ( isset( $_POST['cmg_grid_id'] ) && 
+        if ( isset( $_POST['cmg_grid_id'] ) &&
+            isset( $_POST['cmg_grid_layout'] ) &&
             isset( $_POST['cmg_images_list_desktop'] ) &&
             isset( $_POST['cmg_images_list_mobile'] ) &&
             isset( $_POST['cmg_buttons_list_mobile'] ) &&
@@ -47,6 +48,7 @@ class CMG_Clickable_Media_Grid_Admin {
             $clickable_media_grids = get_option( self::GRIDS_OPTION_NAME );
 
             $new_grid = array( $_POST['cmg_grid_id'] => array(
+                'layout' => $_POST['cmg_grid_layout'],
                 'images_desktop' => $_POST['cmg_images_list_desktop'],
                 'images_mobile' => $_POST['cmg_images_list_mobile'],
                 'buttons_desktop' => $_POST['cmg_buttons_list_desktop'],
@@ -78,11 +80,44 @@ class CMG_Clickable_Media_Grid_Admin {
             </div>
         </div>
 
+        <?php $clickable_media_grids = get_option( self::GRIDS_OPTION_NAME ); ?>
+
+        
+        <div class="row">
+            <div class="col-12">
+                <table class="table" style="width: 100%; text-align:center;">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Layout</th>
+                            <th scope="col">Images Mobile</th>
+                            <th scope="col">Images Desktop</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach( $clickable_media_grids as $cmg_id => $clickable_media_grid ): ?>
+                            <tr>
+                                <td><?php echo $cmg_id ?></td>
+                                <td><?php echo ( isset( $clickable_media_grid['layout'] ) ) ? $clickable_media_grid['layout'] : '-'; ?></td>
+                                <td><?php echo $clickable_media_grid['images_desktop'] ?></td>
+                                <td><?php echo $clickable_media_grid['images_mobile'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <?php
     }
 
     public function grids_section() {
         ?>
+
+        <label class="cmg-settings-label" for="cmg_grid_layout"><?php _e( 'Layout:', 'clickable-media-grid' ) ?></label>
+        <select name="cmg_grid_layout" required>
+            <option value="1"><?php _e( 'Layout 1 (7 images)', 'clickable-media-grid' ); ?>
+        </select>
 
         <label class="cmg-settings-label" for="cmg_grid_id"><?php _e( 'ID:', 'clickable-media-grid' ) ?></label>
         <input type="text" name="cmg_grid_id" required/>
