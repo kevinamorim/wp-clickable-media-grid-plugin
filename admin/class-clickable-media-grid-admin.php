@@ -45,24 +45,34 @@ class CMG_Clickable_Media_Grid_Admin {
             isset( $_POST['cmg_buttons_list_mobile'] ) &&
             isset( $_POST['cmg_buttons_list_desktop'] ) ) {
 
-            $clickable_media_grids = get_option( self::GRIDS_OPTION_NAME );
+            if ( $this->validate_list( $_POST['cmg_images_list_desktop'], 7 ) == false ||
+                $this->validate_list( $_POST['cmg_images_list_mobile'], 7 ) == false ||
+                $this->validate_list( $_POST['cmg_buttons_list_mobile'], 14 ) == false ||
+                $this->validate_list( $_POST['cmg_buttons_list_desktop'], 14 ) == false ) {
 
-            $new_grid = array( $_POST['cmg_grid_id'] => array(
-                'layout' => $_POST['cmg_grid_layout'],
-                'images_desktop' => $_POST['cmg_images_list_desktop'],
-                'images_mobile' => $_POST['cmg_images_list_mobile'],
-                'buttons_desktop' => $_POST['cmg_buttons_list_desktop'],
-                'buttons_mobile' => $_POST['cmg_buttons_list_mobile'],
-            ));
+                    $this->form_validation_notice();
 
-            if ( is_array( $clickable_media_grids ) && 
-                count( $clickable_media_grids ) > 0 ) {
-                $clickable_media_grids = $clickable_media_grids + $new_grid;
             } else {
-                $clickable_media_grids = $new_grid;
-            }
 
-            update_option( self::GRIDS_OPTION_NAME, $clickable_media_grids );
+                $clickable_media_grids = get_option( self::GRIDS_OPTION_NAME );
+
+                $new_grid = array( $_POST['cmg_grid_id'] => array(
+                    'layout' => $_POST['cmg_grid_layout'],
+                    'images_desktop' => $_POST['cmg_images_list_desktop'],
+                    'images_mobile' => $_POST['cmg_images_list_mobile'],
+                    'buttons_desktop' => $_POST['cmg_buttons_list_desktop'],
+                    'buttons_mobile' => $_POST['cmg_buttons_list_mobile'],
+                ));
+    
+                if ( is_array( $clickable_media_grids ) && 
+                    count( $clickable_media_grids ) > 0 ) {
+                    $clickable_media_grids = $clickable_media_grids + $new_grid;
+                } else {
+                    $clickable_media_grids = $new_grid;
+                }
+    
+                update_option( self::GRIDS_OPTION_NAME, $clickable_media_grids );
+            }
 
         }
 
@@ -135,5 +145,22 @@ class CMG_Clickable_Media_Grid_Admin {
         <input type="text" name="cmg_buttons_list_mobile" required/>
 
         <?php
+    }
+
+    private function form_validation_notice() {
+        ?>
+        <div class="notice notice-error">
+            <p><?php _e( 'Form is invalid! Check if you have the correct number of images and buttons!', 'clickable-media-grid' ); ?></p>
+        </div>
+        <?php
+    }
+
+    private function validate_list( $list_as_string, $expected_count ) {
+        if ( isset( $list_as_string ) == false ) return false;
+        $converted_to_array = explode( ',', $list_as_string );
+
+        if ( isset( $converted_to_array ) && count( $converted_to_array ) == $expected_count )
+            return true;
+        return false;
     }
 }

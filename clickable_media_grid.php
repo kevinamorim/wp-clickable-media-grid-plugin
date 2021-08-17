@@ -19,8 +19,8 @@ if ( !class_exists( 'CMG_Clickable_Media_Grid_Admin' ) ) {
     include_once( 'admin/class-clickable-media-grid-admin.php' );
 }
 
-if ( !class_exists( 'CMG_Media_Grid_Type' ) ) {
-    include_once( 'inc/class-clickable-media-grid-posttype.php' );
+if ( !class_exists( 'CMG_Media_Grid_Frontend' ) ) {
+    include_once( 'inc/class-clickable-media-grid-frontend.php' );
 }
 
 
@@ -34,6 +34,6 @@ function cmg_admin_init() {
     if ( is_admin() ) {
         new CMG_Clickable_Media_Grid_Admin();
     } else {
-        new CMG_Media_Grid_Type();
+        new CMG_Media_Grid_Frontend();
     }
 }

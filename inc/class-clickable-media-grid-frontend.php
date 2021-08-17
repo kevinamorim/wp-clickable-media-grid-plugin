@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class CMG_Media_Grid_Type {
+class CMG_Media_Grid_Frontend {
 
     const GRIDS_OPTION_NAME = 'cmg_grids';
 
@@ -14,7 +14,7 @@ class CMG_Media_Grid_Type {
     }
 
     public function enqueue_styles() {
-        wp_enqueue_style( 'cmg-styles', plugin_dir_url( __FILE__ ) . '../assets/styles.css', array(), '' );
+        wp_enqueue_style( 'cmg-styles', plugin_dir_url( __FILE__ ) . '../assets/styles.min.css', array(), '' );
     }
 
     public function display_grid( $attrs ) {
