@@ -36,4 +36,27 @@ jQuery( document ).ready( function( $ ) {
 
     });
 
+    jQuery('.cmg-edit-button').on( 'click', function( event ) {
+
+        let id = jQuery(this).attr('data-id');
+
+        $.ajax({
+            type: 'POST',
+            url: cmg_script.ajax_url,
+            data: {
+                action: 'call_cmg_get_cmg_by_id',
+                id: id
+            },
+            dataType: 'json'
+        }).done( function( data ) {
+            
+            jQuery( "input[name='cmg_grid_id']" ).val( id );
+            jQuery( "select[name='cmg_grid_layout']" ).val( data.layout );
+            jQuery( "input[name='cmg_images_list_desktop']" ).val( data.images_desktop );
+            jQuery( "input[name='cmg_images_list_mobile']" ).val( data.images_mobile );
+            jQuery( "input[name='cmg_buttons_list_desktop']" ).val( data.buttons_desktop );
+            jQuery( "input[name='cmg_buttons_list_mobile']" ).val( data.buttons_mobile );
+        });
+    });
+
 });

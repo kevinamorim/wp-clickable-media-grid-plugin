@@ -20,6 +20,11 @@ class CMG_Clickable_Media_Grid_Admin {
 
     public function enqueue_scripts() {
         wp_enqueue_script( 'cmg-admin-scripts', plugin_dir_url( __FILE__ ) . '../assets/scripts.admin.js', array( 'jquery' ), false, true );
+        wp_localize_script( 'cmg-admin-scripts', 'cmg_script', array( 
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            ) 
+        );
+        wp_set_script_translations( 'cmg-admin-scripts', 'clickable-media-grid' );
     }
 
     public function create_menu_page() {
@@ -61,21 +66,35 @@ class CMG_Clickable_Media_Grid_Admin {
 
                 $clickable_media_grids = get_option( self::GRIDS_OPTION_NAME );
 
-                $new_grid = array( $_POST['cmg_grid_id'] => array(
-                    'layout' => $_POST['cmg_grid_layout'],
-                    'images_desktop' => $_POST['cmg_images_list_desktop'],
-                    'images_mobile' => $_POST['cmg_images_list_mobile'],
-                    'buttons_desktop' => $_POST['cmg_buttons_list_desktop'],
-                    'buttons_mobile' => $_POST['cmg_buttons_list_mobile'],
-                ));
-    
-                if ( is_array( $clickable_media_grids ) && 
-                    count( $clickable_media_grids ) > 0 ) {
-                    $clickable_media_grids = $clickable_media_grids + $new_grid;
+                if ( array_key_exists( $_POST['cmg_grid_id'], $clickable_media_grids ) ) {
+
+                    // Update existing.
+                    $id = $_POST['cmg_grid_id'];
+                    $clickable_media_grids[ $id ]['layout'] = $_POST['cmg_grid_layout'];
+                    $clickable_media_grids[ $id ]['images_desktop'] = $_POST['cmg_images_list_desktop'];
+                    $clickable_media_grids[ $id ]['images_mobile'] = $_POST['cmg_images_list_mobile'];
+                    $clickable_media_grids[ $id ]['buttons_desktop'] = $_POST['cmg_buttons_list_desktop'];
+                    $clickable_media_grids[ $id ]['buttons_mobile'] = $_POST['cmg_buttons_list_mobile'];
+
                 } else {
-                    $clickable_media_grids = $new_grid;
+
+                    $new_grid = array( $_POST['cmg_grid_id'] => array(
+                        'layout' => $_POST['cmg_grid_layout'],
+                        'images_desktop' => $_POST['cmg_images_list_desktop'],
+                        'images_mobile' => $_POST['cmg_images_list_mobile'],
+                        'buttons_desktop' => $_POST['cmg_buttons_list_desktop'],
+                        'buttons_mobile' => $_POST['cmg_buttons_list_mobile'],
+                    ));
+        
+                    if ( is_array( $clickable_media_grids ) && 
+                        count( $clickable_media_grids ) > 0 ) {
+                        $clickable_media_grids = $clickable_media_grids + $new_grid;
+                    } else {
+                        $clickable_media_grids = $new_grid;
+                    }
+
                 }
-    
+
                 update_option( self::GRIDS_OPTION_NAME, $clickable_media_grids );
             }
 
@@ -104,8 +123,8 @@ class CMG_Clickable_Media_Grid_Admin {
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Layout</th>
-                            <th scope="col">Images Mobile</th>
                             <th scope="col">Images Desktop</th>
+                            <th scope="col">Images Mobile</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,6 +137,7 @@ class CMG_Clickable_Media_Grid_Admin {
                                     <td><?php echo ( isset( $clickable_media_grid['layout'] ) ) ? $clickable_media_grid['layout'] : '-'; ?></td>
                                     <td><?php echo $clickable_media_grid['images_desktop'] ?></td>
                                     <td><?php echo $clickable_media_grid['images_mobile'] ?></td>
+                                    <td><a class="button cmg-edit-button" data-id="<?php echo $cmg_id; ?>">Editar</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>

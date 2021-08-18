@@ -3,7 +3,7 @@
   Plugin Name: Clickable Media Grid
   Plugin URI: https://pocaconsulting.pt
   Description: Make clickable media grids.
-  Version: 0.1.1
+  Version: 0.2.0
   Author: Poça Consulting
   Author URI: https://pocaconsulting.pt
   Text Domain: clickable-media-grid
@@ -17,6 +17,10 @@ if ( !defined( 'WPINC' ) ) {
 
 if ( !class_exists( 'CMG_Clickable_Media_Grid_Admin' ) ) {
     include_once( 'admin/class-clickable-media-grid-admin.php' );
+}
+
+if ( !class_exists( 'CMG_Media_Grid_Admin_Ajax' ) ) {
+    include_once( 'admin/class-clickable-media-grid-admin-ajax.php' );
 }
 
 if ( !class_exists( 'CMG_Media_Grid_Frontend' ) ) {
@@ -33,6 +37,7 @@ add_action( 'init', 'cmg_admin_init' );
 function cmg_admin_init() {
     if ( is_admin() ) {
         new CMG_Clickable_Media_Grid_Admin();
+        new CMG_Clickable_Media_Grid_Admin_Ajax();
     } else {
         new CMG_Media_Grid_Frontend();
     }
