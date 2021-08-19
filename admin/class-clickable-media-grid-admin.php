@@ -178,8 +178,8 @@ class CMG_Clickable_Media_Grid_Admin {
 
         <label class="cmg-settings-label" for="cmg_grid_layout"><?php _e( 'Layout:', 'clickable-media-grid' ) ?></label>
         <select name="cmg_grid_layout" id="cmg_grid_layout" required>
-            <option value="1"><?php _e( 'Layout 1 (7 images)', 'clickable-media-grid' ); ?>
-            <option value="2"><?php _e( 'Layout 2 (8 images)', 'clickable-media-grid' ); ?>
+            <option value="1" <?php if ( $this->choosed_layout_id == 1 ): ?> selected="selected" <?php endif; ?>><?php _e( 'Layout 1 (7 images)', 'clickable-media-grid' ); ?>
+            <option value="2" <?php if ( $this->choosed_layout_id == 2 ): ?> selected="selected" <?php endif; ?>><?php _e( 'Layout 2 (8 images)', 'clickable-media-grid' ); ?>
         </select>
         <input type="button" class="button" id="cmg-select-layout-btn" value="<?php _e( 'Choose Layout', 'clickable-media-grid' ) ?>" />
 
@@ -273,8 +273,6 @@ class CMG_Clickable_Media_Grid_Admin {
 
             $result .= ',' . $buttons_target_urls[$x];
         }
-
-        error_log( "Converted: " . $result );
         return $result;
     }
 }

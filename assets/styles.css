@@ -7,8 +7,22 @@
     margin: 0 auto;
 }
 
+.cmg-templ-2-container {
+    display: flex;
+    max-width: 100% !important;
+    height: 100%;
+    flex-wrap: wrap;
+    padding: 0 5px 0 5px;
+    margin: 0 auto;
+}
+
+.cmg-templ-2-container .cmg-img-container {
+    flex: 1 0 25%;
+}
+
 @media only screen and (min-width: 1024px) {
-    .cmg-templ-1-container {
+    .cmg-templ-1-container,
+    .cmg-templ-2-container {
         max-width: 80% !important;
     }
 }

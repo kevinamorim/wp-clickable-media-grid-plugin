@@ -30,8 +30,18 @@ class CMG_Media_Grid_Frontend {
         $buttons_mobile = explode( ',', $options[ $grid_id ]['buttons_mobile'] );
         $buttons_desktop = explode( ',', $options[ $grid_id ]['buttons_desktop'] );
 
+        $layout_id = $options[ $grid_id ]['layout'];
 
         $template_file = 'frontend-template-1.php';
+
+        switch( $layout_id ) {
+            case 1:
+                $template_file = 'frontend-template-1.php';
+                break;
+            case 2:
+                $template_file = 'frontend-template-2.php';
+                break;
+        }
 
         if ( $template_file ) {
             if ( $theme_file = locate_template( array( $template_file ) ) ) {
