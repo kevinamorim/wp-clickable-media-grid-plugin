@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Clickable Media Grid\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-17 11:10+0100\n"
-"PO-Revision-Date: 2021-08-17 10:17+0000\n"
+"PO-Revision-Date: 2021-08-19 15:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: Português\n"
 "Language: pt_PT\n"
@@ -18,49 +18,74 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.5.3; wp-5.8"
 
-#: admin/class-clickable-media-grid-admin.php:22
-#: admin/class-clickable-media-grid-admin.php:23
+#: admin/class-clickable-media-grid-admin.php:234
+#: admin/class-clickable-media-grid-admin.php:259
+#, php-format
+msgid "Button Text (%s)"
+msgstr "Texto Botão (%s)"
+
+#: admin/class-clickable-media-grid-admin.php:211
+msgid "Choose Layout"
+msgstr "Escolher Layout"
+
+#: admin/class-clickable-media-grid-admin.php:49
+#: admin/class-clickable-media-grid-admin.php:50
 msgid "Clickable Media Grid"
 msgstr "Clickable Media Grid"
 
-#: admin/class-clickable-media-grid-admin.php:33
-msgid "Grids"
-msgstr "Grelhas"
+#: admin/class-clickable-media-grid-admin.php:227
+msgid "DESKTOP BUTTONS"
+msgstr "BUTÕES DESKTOP"
 
-#: admin/class-clickable-media-grid-admin.php:88
-msgid "Save"
-msgstr "Guardar"
-
-#: admin/class-clickable-media-grid-admin.php:127
-msgid "Layout:"
-msgstr "Layout:"
-
-#: admin/class-clickable-media-grid-admin.php:129
-msgid "Layout 1 (7 images)"
-msgstr "Layout 1 (7 imagens)"
-
-#: admin/class-clickable-media-grid-admin.php:132
-msgid "ID:"
-msgstr "ID:"
-
-#: admin/class-clickable-media-grid-admin.php:135
-msgid "Images List (Desktop):"
-msgstr "Lista de Imagens (Desktop):"
-
-#: admin/class-clickable-media-grid-admin.php:138
-msgid "Images List (Mobile):"
-msgstr "Lista de Imagens (Mobile):"
-
-#: admin/class-clickable-media-grid-admin.php:141
-msgid "Buttons List (Desktop):"
-msgstr "Lista de Botões (Desktop):"
-
-#: admin/class-clickable-media-grid-admin.php:144
-msgid "Buttons List (Mobile):"
-msgstr "Lista de Botões (Mobile):"
-
-#: admin/class-clickable-media-grid-admin.php:153
+#: admin/class-clickable-media-grid-admin.php:282
 msgid ""
 "Form is invalid! Check if you have the correct number of images and buttons!"
 msgstr ""
 "Formulário inválido! Confirme se tem o número de correto de imagens e butões!"
+
+#: admin/class-clickable-media-grid-admin.php:60
+msgid "Grids"
+msgstr "Grelhas"
+
+#: admin/class-clickable-media-grid-admin.php:213
+msgid "ID:"
+msgstr "ID:"
+
+#: admin/class-clickable-media-grid-admin.php:216
+msgid "Images List (Desktop):"
+msgstr "Lista de Imagens (Desktop):"
+
+#: admin/class-clickable-media-grid-admin.php:221
+msgid "Images List (Mobile):"
+msgstr "Lista de Imagens (Mobile):"
+
+#: admin/class-clickable-media-grid-admin.php:208
+msgid "Layout 1 (7 images)"
+msgstr "Layout 1 (7 imagens)"
+
+#: admin/class-clickable-media-grid-admin.php:209
+msgid "Layout 2 (8 images)"
+msgstr "Layout 2 (8 imagens)"
+
+#: admin/class-clickable-media-grid-admin.php:206
+msgid "Layout:"
+msgstr "Layout:"
+
+#: admin/class-clickable-media-grid-admin.php:252
+msgid "MOBILE BUTTONS"
+msgstr "BUTÕES MOBILE"
+
+#: admin/class-clickable-media-grid-admin.php:160
+msgid "Save"
+msgstr "Guardar"
+
+#: admin/class-clickable-media-grid-admin.php:218
+#: admin/class-clickable-media-grid-admin.php:223
+msgid "Select images"
+msgstr "Selecionar imagens"
+
+#: admin/class-clickable-media-grid-admin.php:243
+#: admin/class-clickable-media-grid-admin.php:268
+#, php-format
+msgid "Target URL: (%s)"
+msgstr "URL Destino (%s)"
