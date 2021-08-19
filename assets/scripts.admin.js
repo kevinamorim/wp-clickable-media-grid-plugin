@@ -49,6 +49,14 @@ jQuery( document ).ready( function( $ ) {
             },
             dataType: 'json'
         }).done( function( data ) {
+
+            console.log(data);
+            for( let i = 0; i < data.buttons.desktop_targets.length; i++ ) {
+                jQuery( "input[name='cmg-button-text-desktop[" + i + "]" ).val( data.buttons.desktop_texts[i] );
+                jQuery( "input[name='cmg-button-url-desktop[" + i + "]" ).val( data.buttons.desktop_targets[i] );
+                jQuery( "input[name='cmg-button-text-mobile[" + i + "]" ).val( data.buttons.mobile_texts[i] );
+                jQuery( "input[name='cmg-button-url-mobile[" + i + "]" ).val( data.buttons.mobile_targets[i] );
+            } 
             
             jQuery( "input[name='cmg_grid_id']" ).val( id );
             jQuery( "select[name='cmg_grid_layout']" ).val( data.layout );

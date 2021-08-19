@@ -25,12 +25,31 @@ class CMG_Clickable_Media_Grid_Admin_Ajax {
 
                     $clickable_media_grid_to_edit = $clickable_media_grids[ $id ];
 
+                    $buttons_desktop_items = explode( ',', $clickable_media_grid_to_edit['buttons_desktop'] );
+                    $buttons_mobile_items = explode( ',', $clickable_media_grid_to_edit['buttons_mobile'] );
+
+                    $buttons = array(
+                        "desktop_texts" => array(),
+                        "desktop_targets" => array(),
+                        "mobile_texts" => array(),
+                        "mobile_targets" => array()
+                    );
+
+                    for( $x = 0; $x < count( $buttons_desktop_items ); $x++ ) {
+                        if ( $x % 2 == 0 ) {
+                            array_push( $buttons["desktop_texts"], $buttons_desktop_items[$x] );
+                            array_push( $buttons["mobile_texts"], $buttons_mobile_items[$x] );
+                        } else {
+                            array_push( $buttons["desktop_targets"], $buttons_desktop_items[$x] );
+                            array_push( $buttons["mobile_targets"], $buttons_mobile_items[$x] );
+                        }
+                    }
+
                     echo json_encode( array(
                         'layout' => $clickable_media_grid_to_edit['layout'],
                         'images_desktop' => $clickable_media_grid_to_edit['images_desktop'],
                         'images_mobile' => $clickable_media_grid_to_edit['images_mobile'],
-                        'buttons_desktop' => $clickable_media_grid_to_edit['buttons_desktop'],
-                        'buttons_mobile' => $clickable_media_grid_to_edit['buttons_mobile']
+                        'buttons' => $buttons
                     ) );
 
                     die();
