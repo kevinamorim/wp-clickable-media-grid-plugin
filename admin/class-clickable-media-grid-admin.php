@@ -9,10 +9,12 @@ class CMG_Clickable_Media_Grid_Admin {
     const GRIDS_OPTION_NAME = 'cmg_grids';
     const LAYOUT_CONFIGS = array(
         "1" => array(
-            "items" => 7
+            "items" => 7,               // Number of items on the layout.
+            "single_layout" => false,   // Whether there is a different layout for mobile.
         ),
         "2" => array(
-            "items" => 8
+            "items" => 8,
+            "single_layout" => true
         )
     );
 
@@ -63,6 +65,8 @@ class CMG_Clickable_Media_Grid_Admin {
 
     public function cmg_settings_page() {
 
+        $single_layout = self::LAYOUT_CONFIGS[$this->choosed_layout_id]["single_layout"];
+
         if ( isset( $_POST['cmg_grid_id'] ) &&
             isset( $_POST['cmg_grid_layout'] ) &&
             isset( $_POST['cmg_images_list_desktop'] ) &&
@@ -72,8 +76,21 @@ class CMG_Clickable_Media_Grid_Admin {
             isset( $_POST['cmg-button-text-mobile'] ) &&
             isset( $_POST['cmg-button-url-mobile'] ) ) {
 
-            if ( $this->validate_list( $_POST['cmg_images_list_desktop'], self::LAYOUT_CONFIGS[$this->choosed_layout_id]["items"] ) == false ||
-                $this->validate_list( $_POST['cmg_images_list_mobile'], self::LAYOUT_CONFIGS[$this->choosed_layout_id]["items"] ) == false ) {
+                if ( $single_layout == false ) {
+                    if ( isset( $_POST['cmg_images_list_mobile'] ) == false ||
+                         isset( $_POST['cmg-button-text-mobile'] ) == false ||
+                         isset( $_POST['cmg-button-url-mobile'] ) == false ) {
+                             // Not valid.
+                             return;
+                         }
+
+                    if ( $this->validate_list( $_POST['cmg_images_list_mobile'], self::LAYOUT_CONFIGS[$this->choosed_layout_id]["items"] ) == false ) {
+                        $this->form_validation_notice();
+                        return;
+                    }
+                }
+
+            if ( $this->validate_list( $_POST['cmg_images_list_desktop'], self::LAYOUT_CONFIGS[$this->choosed_layout_id]["items"] ) == false ) {
                     $this->form_validation_notice();
             } else {
 
@@ -82,31 +99,41 @@ class CMG_Clickable_Media_Grid_Admin {
                 $cmg_buttons_list_desktop = $this->convert_buttons_input_to_comma_sep_string( 
                     $_POST['cmg-button-text-desktop'], $_POST['cmg-button-url-desktop'] );
 
-                $cmg_buttons_list_mobile = $this->convert_buttons_input_to_comma_sep_string(
-                    $_POST['cmg-button-text-mobile'], $_POST['cmg-button-url-mobile']
-                );
+
+                if ( $single_layout == false) {
+                    $cmg_buttons_list_mobile = $this->convert_buttons_input_to_comma_sep_string(
+                        $_POST['cmg-button-text-mobile'], $_POST['cmg-button-url-mobile']
+                    );
+                }
 
                 if ( array_key_exists( $_POST['cmg_grid_id'], $clickable_media_grids ) ) {
 
                     // Update existing.
                     $id = $_POST['cmg_grid_id'];
                     $clickable_media_grids[ $id ]['layout'] = $_POST['cmg_grid_layout'];
-                    $clickable_media_grids[ $id ]['images_desktop'] = $_POST['cmg_images_list_desktop'];
-                    $clickable_media_grids[ $id ]['images_mobile'] = $_POST['cmg_images_list_mobile'];
 
+                    $clickable_media_grids[ $id ]['images_desktop'] = $_POST['cmg_images_list_desktop'];
                     $clickable_media_grids[ $id ]['buttons_desktop'] = $cmg_buttons_list_desktop;
-                    $clickable_media_grids[ $id ]['buttons_mobile'] = $cmg_buttons_list_mobile;
+
+                    if ( $single_layout == false ) {
+                        $clickable_media_grids[ $id ]['buttons_mobile'] = $cmg_buttons_list_mobile;
+                        $clickable_media_grids[ $id ]['images_mobile'] = $_POST['cmg_images_list_mobile'];
+                    }
 
                 } else {
 
                     $new_grid = array( $_POST['cmg_grid_id'] => array(
                         'layout' => $_POST['cmg_grid_layout'],
                         'images_desktop' => $_POST['cmg_images_list_desktop'],
-                        'images_mobile' => $_POST['cmg_images_list_mobile'],
                         'buttons_desktop' => $cmg_buttons_list_desktop,
-                        'buttons_mobile' => $cmg_buttons_list_mobile,
                     ));
-        
+
+                    if ( $single_layout == false ) {
+                        $new_grid[ $_POST['cmg_grid_id'] ]['images_mobile'] = $_POST['cmg_images_list_mobile'];
+                        $new_grid[ $_POST['cmg_grid_id'] ]['buttons_mobile'] = $cmg_buttons_list_mobile;
+            
+                    }
+
                     if ( is_array( $clickable_media_grids ) && 
                         count( $clickable_media_grids ) > 0 ) {
                         $clickable_media_grids = $clickable_media_grids + $new_grid;
@@ -189,10 +216,12 @@ class CMG_Clickable_Media_Grid_Admin {
         <label class="cmg-settings-label" for="cmg_images_list_desktop"><?php _e( 'Images List (Desktop):', 'clickable-media-grid' ) ?></label>
         <input type="text" name="cmg_images_list_desktop" id="cmg_images_list_desktop" required/>
         <input type="button" class="button upload_image_button" data-target="cmg_images_list_desktop" value="<?php _e( 'Select images', 'clickable-media-grid' ); ?>" />
-
-        <label class="cmg-settings-label" for="cmg_images_list_mobile"><?php _e( 'Images List (Mobile):', 'clickable-media-grid' ) ?></label>
-        <input type="text" name="cmg_images_list_mobile" id="cmg_images_list_mobile" required/>
-        <input type="button" class="button upload_image_button" data-target="cmg_images_list_mobile" value="<?php _e( 'Select images', 'clickable-media-grid' ); ?>" />
+            
+        <?php if ( self::LAYOUT_CONFIGS[$this->choosed_layout_id]["single_layout"] == false ): ?>
+            <label class="cmg-settings-label" for="cmg_images_list_mobile"><?php _e( 'Images List (Mobile):', 'clickable-media-grid' ) ?></label>
+            <input type="text" name="cmg_images_list_mobile" id="cmg_images_list_mobile" required/>
+            <input type="button" class="button upload_image_button" data-target="cmg_images_list_mobile" value="<?php _e( 'Select images', 'clickable-media-grid' ); ?>" />
+        <?php endif; ?>
 
         <!-- DESKTOP -->
         <h3><?php _e( 'DESKTOP BUTTONS', 'clickable-media-grid' ); ?></h3>
@@ -218,29 +247,31 @@ class CMG_Clickable_Media_Grid_Admin {
 
         <?php endfor; ?>
 
-        <!-- MOBILE -->
-        <h3><?php _e( 'MOBILE BUTTONS', 'clickable-media-grid' ); ?></h3>
-        <?php for ( $x = 0; $x < self::LAYOUT_CONFIGS[$this->choosed_layout_id]["items"]; $x++ ): ?>
-            
-            <div class="row">
-                <label 
-                    class="cmg-settings-label" 
-                    for="cmg-button-text-mobile[<?php echo $x ?>]">
-                        <?php echo sprintf( __( 'Button Text (%s)', 'clickable-media-grid' ), $x + 1 ); ?>:
-                </label>
-                <input type="text" name="cmg-button-text-mobile[<?php echo $x ?>]" id="cmg-button-text-mobile[<?php echo $x ?>]" required />
+        <?php if ( self::LAYOUT_CONFIGS[$this->choosed_layout_id]["single_layout"] == false ): ?>
+            <!-- MOBILE -->
+            <h3><?php _e( 'MOBILE BUTTONS', 'clickable-media-grid' ); ?></h3>
+            <?php for ( $x = 0; $x < self::LAYOUT_CONFIGS[$this->choosed_layout_id]["items"]; $x++ ): ?>
+                
+                <div class="row">
+                    <label 
+                        class="cmg-settings-label" 
+                        for="cmg-button-text-mobile[<?php echo $x ?>]">
+                            <?php echo sprintf( __( 'Button Text (%s)', 'clickable-media-grid' ), $x + 1 ); ?>:
+                    </label>
+                    <input type="text" name="cmg-button-text-mobile[<?php echo $x ?>]" id="cmg-button-text-mobile[<?php echo $x ?>]" required />
 
 
 
-                <label 
-                    class="cmg-settings-label" 
-                    for="cmg-button-url-mobile[<?php echo $x ?>]">
-                        <?php echo sprintf( __( 'Target URL: (%s)', 'clickable-media-grid' ), $x + 1 ); ?>:
-                </label>
-                <input style="width:50%;" type="text" name="cmg-button-url-mobile[<?php echo $x ?>]" id="cmg-button-url-mobile[<?php echo $x ?>]" required />
-            </div>
+                    <label 
+                        class="cmg-settings-label" 
+                        for="cmg-button-url-mobile[<?php echo $x ?>]">
+                            <?php echo sprintf( __( 'Target URL: (%s)', 'clickable-media-grid' ), $x + 1 ); ?>:
+                    </label>
+                    <input style="width:50%;" type="text" name="cmg-button-url-mobile[<?php echo $x ?>]" id="cmg-button-url-mobile[<?php echo $x ?>]" required />
+                </div>
 
-        <?php endfor; ?>
+            <?php endfor; ?>
+        <?php endif; ?>
 
         <?php
     }
