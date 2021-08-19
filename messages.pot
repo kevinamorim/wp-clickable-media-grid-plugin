@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-19 12:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/class-clickable-media-grid-admin.php:37
+#: admin/class-clickable-media-grid-admin.php:38
+msgid "Clickable Media Grid"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:48
+msgid "Grids"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:125
+msgid "Save"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:171
+msgid "Layout:"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:173
+msgid "Layout 1 (7 images)"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:176
+msgid "ID:"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:179
+msgid "Images List (Desktop):"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:181
+#: admin/class-clickable-media-grid-admin.php:185
+msgid "Select images"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:183
+msgid "Images List (Mobile):"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:188
+msgid "DESKTOP BUTTONS"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:195
+#: admin/class-clickable-media-grid-admin.php:219
+#, php-format
+msgid "Button Text (%s)"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:204
+#: admin/class-clickable-media-grid-admin.php:228
+#, php-format
+msgid "Target URL: (%s)"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:212
+msgid "MOBILE BUTTONS"
+msgstr ""
+
+#: admin/class-clickable-media-grid-admin.php:241
+msgid ""
+"Form is invalid! Check if you have the correct number of images and buttons!"
+msgstr ""

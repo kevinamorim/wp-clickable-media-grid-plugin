@@ -67,4 +67,16 @@ jQuery( document ).ready( function( $ ) {
         });
     });
 
+    jQuery( '#cmg-select-layout-btn' ).on( 'click', function( event ) {
+        let choosedLayout = jQuery( '#cmg_grid_layout' ).val();
+        let url = window.location.href;
+        if ( url.indexOf('?') > -1 ) {
+            url += '&layout=' + choosedLayout;
+        } else {
+            url += '?layout=' + choosedLayout;
+        }
+
+        window.location.href = url;
+    });
+
 });
