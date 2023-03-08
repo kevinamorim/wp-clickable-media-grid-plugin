@@ -29,7 +29,7 @@ class CMG_Media_Grid_Frontend {
         $images_mobile_ids = explode( ',', $options[ $grid_id ]['images_mobile'] );
         $buttons_mobile = explode( ',', $options[ $grid_id ]['buttons_mobile'] );
         $buttons_desktop = explode( ',', $options[ $grid_id ]['buttons_desktop'] );
-
+		
         $layout_id = $options[ $grid_id ]['layout'];
 
         $template_file = 'frontend-template-1.php';
@@ -40,6 +40,9 @@ class CMG_Media_Grid_Frontend {
                 break;
             case 2:
                 $template_file = 'frontend-template-2.php';
+                break;
+			case 3:
+                $template_file = 'frontend-template-3.php';
                 break;
         }
 

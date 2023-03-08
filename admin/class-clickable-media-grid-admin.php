@@ -15,7 +15,11 @@ class CMG_Clickable_Media_Grid_Admin {
         "2" => array(
             "items" => 8,
             "single_layout" => true
-        )
+        ),
+		"3" => array(
+            "items" => 7,               // Number of items on the layout.
+            "single_layout" => true,   // Whether there is a different layout for mobile.
+        ),
     );
 
     private $page_slug;
@@ -99,7 +103,6 @@ class CMG_Clickable_Media_Grid_Admin {
                 $cmg_buttons_list_desktop = $this->convert_buttons_input_to_comma_sep_string( 
                     $_POST['cmg-button-text-desktop'], $_POST['cmg-button-url-desktop'] );
 
-
                 if ( $single_layout == false) {
                     $cmg_buttons_list_mobile = $this->convert_buttons_input_to_comma_sep_string(
                         $_POST['cmg-button-text-mobile'], $_POST['cmg-button-url-mobile']
@@ -142,7 +145,7 @@ class CMG_Clickable_Media_Grid_Admin {
                     }
 
                 }
-
+				
                 update_option( self::GRIDS_OPTION_NAME, $clickable_media_grids );
             }
 
@@ -207,6 +210,7 @@ class CMG_Clickable_Media_Grid_Admin {
         <select name="cmg_grid_layout" id="cmg_grid_layout" required>
             <option value="1" <?php if ( $this->choosed_layout_id == 1 ): ?> selected="selected" <?php endif; ?>><?php _e( 'Layout 1 (7 images)', 'clickable-media-grid' ); ?>
             <option value="2" <?php if ( $this->choosed_layout_id == 2 ): ?> selected="selected" <?php endif; ?>><?php _e( 'Layout 2 (8 images)', 'clickable-media-grid' ); ?>
+			<option value="3" <?php if ( $this->choosed_layout_id == 3 ): ?> selected="selected" <?php endif; ?>><?php _e( 'Layout 3 (7 images)', 'clickable-media-grid' ); ?>
         </select>
         <input type="button" class="button" id="cmg-select-layout-btn" value="<?php _e( 'Choose Layout', 'clickable-media-grid' ) ?>" />
 
